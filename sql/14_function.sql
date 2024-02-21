@@ -5,7 +5,22 @@
 
 CREATE OR REPLACE FUNCTION list_category(TEXT) RETURNS TABLE(title TEXT) AS
 $$
--- FIXME: implementation goes here
+SELECT
+    title AS list_category
+FROM
+    film
+JOIN
+    film_category
+USING
+    (film_id)
+JOIN
+    category
+USING
+    (category_id)
+WHERE
+    name ILIKE $1
+ORDER BY
+    title;
 $$
 LANGUAGE SQL
 IMMUTABLE
